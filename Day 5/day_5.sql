@@ -1,6 +1,8 @@
 SELECT *
 FROM listening_logs;
 
+-- Write a query that returns the top 3 artists per user. 
+-- Order the results by the most played.
 WITH playlist AS (
 	SELECT 
 		user_name,
