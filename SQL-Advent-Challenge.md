@@ -132,3 +132,155 @@ FROM snowfall_log
 WHERE fall_time LIKE '2025-12-24%';
 ```
 
+
+## Day 8 Challenge
+Mrs. Claus is organizing the holiday storage room and wants a single list of all decorations — both Christmas trees and light sets. Write a query that combines both tables and includes each item's name and category.
+
+### Tables  
+* storage_trees(item_name, category)
+* storage_lights(item_name, category)
+
+### Query  
+```sql
+SELECT 
+  item_name,
+  category
+FROM storage_trees
+UNION
+SELECT 
+  item_name,
+  category
+FROM storage_lights;
+```
+
+## Day 9 Challenge
+The elves are testing new tinsel–light combinations to find the next big holiday trend. Write a query to generate every possible pairing of tinsel colors and light colors, include in your output a column that combines the two values separated with a dash ("-").
+
+### Tables  
+* tinsel_colors(tinsel_id, color_name)
+* light_colors(light_id, color_name)
+
+### Query  
+```sql
+SELECT 
+  t.tinsel_id,
+  l.light_id,
+  CONCAT(t.color_name, '-', l.color_name) AS "tinsel-light"
+FROM tinsel_colors t
+CROSS JOIN light_colors l;
+```
+
+## Day 10 Challenge
+In the holiday cookie factory, workers are measuring how efficient each oven is. Can you find the average baking time per oven rounded to one decimal place?
+
+### Tables  
+* cookie_batches(batch_id, oven_id, baking_time_minutes)
+
+### Query  
+```sql
+SELECT
+  oven_id,
+  ROUND(AVG(baking_time_minutes), 1) AS avg_baking_time
+FROM cookie_batches
+GROUP BY oven_id;
+```
+
+## Day 11 Challenge
+At the winter market, Cindy Lou is browsing the clothing inventory and wants to find all items with "sweater" in their name. But the challenge is the color and item columns have inconsistent capitalization. Can you write a query to return only the sweater names and their cleaned-up colors.
+
+### Tables  
+* winter_clothing(item_id, item_name, color)
+
+### Query  
+```sql
+SELECT 
+  item_name,
+  CONCAT(
+    UPPER(LEFT(color, 1)), 
+    LOWER(SUBSTRING(color, 2, LENGTH(color)))
+  )
+FROM winter_clothing
+WHERE LOWER(item_name) LIKE '%sweater%';
+```
+
+## Day 12 Challenge
+The North Pole Network wants to see who's the most active in the holiday chat each day. Write a query to count how many messages each user sent, then find the most active user(s) each day. If multiple users tie for first place, return all of them.
+
+### Tables  
+* npn_users(user_id, user_name)
+* npn_messages(message_id, sender_id, sent_at)
+
+### Query  
+```sql
+WITH msg_count AS (
+  SELECT
+    DATE(m.sent_at) AS message_date,
+    u.user_name,
+    COUNT(m.message_id) AS total_messages
+  FROM npn_users u 
+  JOIN npn_messages m 
+    ON u.user_id = m.sender_id
+  GROUP BY DATE(m.sent_at), u.user_name
+),
+ranked_users AS (
+  SELECT 
+    message_date,
+    user_name,
+    total_messages,
+    RANK() OVER (
+      PARTITION BY message_date ORDER BY total_messages DESC
+    ) AS rk
+  FROM msg_count
+)
+SELECT 
+  message_date,
+  user_name,
+  total_messages
+FROM ranked_users
+WHERE rk = 1
+ORDER BY message_date, total_messages DESC;
+```
+
+## Day 13 Challenge
+Santa's audit team is reviewing this year's behavior scores to find the extremes — write a query to return the lowest and highest scores recorded on the Naughty or Nice list.
+
+### Tables  
+* behavior_scores(record_id, child_name, behavior_score)
+
+### Query  
+```sql
+SELECT 
+  MIN(behavior_score),
+  MAX(behavior_score)
+FROM behavior_scores;
+```
+
+
+## Day 14 Challenge
+The Productivity Club is tracking members' challenge start dates and wants to calculate each member's focus_end_date, exactly 14 days after their start date. Can you write a query to return the existing table with the focus_end_date column?
+
+### Tables  
+* focus_challenges(member_id, member_name, start_date)
+
+### Query  
+```sql
+SELECT 
+  *,
+  (start_date + INTERVAL '14 days')::DATE AS focus_end_date
+FROM focus_challenges;
+```
+
+
+## Day 15 Challenge
+The Grinch is tracking his daily mischief scores to see how his behavior changes over time. Can you find how many points his score increased or decreased each day compared to the previous day?
+
+### Tables  
+* grinch_mischief_log(log_date, mischief_score)
+
+### Query  
+
+
+
+
+
+
