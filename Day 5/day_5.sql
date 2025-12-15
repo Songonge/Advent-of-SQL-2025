@@ -1,6 +1,8 @@
+-- Retrieving all data from the table
 SELECT *
 FROM listening_logs;
 
+-- ==================== THE CHALLENGE ====================
 -- Write a query that returns the top 3 artists per user. 
 -- Order the results by the most played.
 WITH playlist AS (
