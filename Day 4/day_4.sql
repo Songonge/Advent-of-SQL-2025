@@ -1,13 +1,17 @@
+-- Retrieving all data from the tables
 SELECT *
 FROM official_shifts;
 
 SELECT *
 FROM last_minute_signups;
 
+-- ============================== THE CHALLENGE ==============================
+-- Using the official_shifts and last_minute_signups tables, create a combined 
+-- de-duplicated volunteer list.
 
--- Using the official_shifts and last_minute_signups tables, create a combined de-duplicated volunteer list.
--- Ensure the list has standardized role labels of Stage Setup, Cocoa Station, Parking Support, 
--- Choir Assistant, Snow Shoveling, Handwarmer Handout.
+-- Ensure the list has standardized role labels of Stage Setup, Cocoa Station, 
+-- Parking Support, Choir Assistant, Snow Shoveling, Handwarmer Handout.
+
 -- Make sure that the timeslot formats follow John's official shifts format.
 
 WITH cleaned_official AS (
