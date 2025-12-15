@@ -1,5 +1,7 @@
 # Challenge: SQL Advent Calendar by Interview Master
 
+The SQL Advent Challenge is an opportunity for SQL lovers to refresh their SQL knowledge by solving a challenge question every day for 24 days. This runs from December 1st to December 24th of each year. The Challenge is organized by Dawn Choo and her team through their Interview Master platform.
+
 ## Day 1 Challenge
 Every year, the city of Whoville conducts a Reindeer Run to find the best reindeers for Santa's Sleigh. Can you write a query to return the name and rank of the top 7 reindeers in this race?
 
@@ -186,7 +188,7 @@ GROUP BY oven_id;
 ```
 
 ## Day 11 Challenge
-At the winter market, Cindy Lou is browsing the clothing inventory and wants to find all items with "sweater" in their name. But the challenge is the color and item columns have inconsistent capitalization. Can you write a query to return only the sweater names and their cleaned-up colors.
+At the winter market, Cindy Lou is browsing the clothing inventory and wants to find all items with "sweater" in their name. But the challenge is that the color and item columns have inconsistent capitalization. Can you write a query to return only the sweater names and their cleaned-up colors.
 
 ### Tables  
 * winter_clothing(item_id, item_name, color)
@@ -278,7 +280,13 @@ The Grinch is tracking his daily mischief scores to see how his behavior changes
 * grinch_mischief_log(log_date, mischief_score)
 
 ### Query  
-
+```sql
+SELECT 
+  log_date,
+  mischief_score,
+  mischief_score - LAG(mischief_score) OVER (ORDER BY log_date) AS daily_score_diff
+FROM grinch_mischief_log;
+```
 
 
 
