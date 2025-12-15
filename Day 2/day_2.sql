@@ -1,9 +1,11 @@
+-- Retrieving data from all tables
 SELECT * 
 FROM snowball_categories;
 
 SELECT * 
 FROM snowball_inventory;
 
+-- =================================== THE CHALLENGE ===================================
 -- Using the snowball_inventory and snowball_categories tables, write a query that 
 -- returns valid snowball categories with the count of valid snowballs per category. 
 -- Your final table should have the columns official_category and total_usable_snowballs. 
