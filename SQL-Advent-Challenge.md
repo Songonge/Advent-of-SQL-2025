@@ -5,7 +5,7 @@ The SQL Advent Challenge is an opportunity for SQL lovers to refresh their SQL k
 ## Day 1 Challenge
 Every year, the city of Whoville conducts a Reindeer Run to find the best reindeers for Santa's Sleigh. Can you write a query to return the name and rank of the top 7 reindeers in this race?
 
-### Tables
+### Table
 reindeer_run_results(number, name, rank, color)
 
 ### Query  
@@ -38,7 +38,7 @@ INNER JOIN toy_delivery d
 ## Day 3 Challenge
 The Grinch has brainstormed a ton of pranks for Whoville, but he only wants to keep the top prank per target, with the highest evilness score. Return the most evil prank for each target. If two pranks have the same evilness, the more recently brainstormed wins.
 
-### Tables  
+### Table  
 * grinch_prank_ideas(prank_id, target_name, prank_description, evilness_score, created_at)
 
 ### Query  
@@ -60,9 +60,9 @@ WHERE rn = 1;
 ```
 
 ## Day 4 Challenge
-Kevin's trying to decorate the house without sending the electricity bill through the roof. Write a query to find the top 5 most energy-efficient decorations (i.e. lowest cost per hour to operate).
+Kevin's trying to decorate the house without sending the electricity bill through the roof. Write a query to find the top 5 most energy-efficient decorations (i.e., lowest cost per hour to operate).
 
-### Tables  
+### Table  
 * hall_decorations(decoration_id, decoration_name, energy_cost_per_hour)
 
 ### Query  
@@ -98,7 +98,7 @@ LEFT JOIN vacations v
 ## Day 6 Challenge
 Buddy is planning a winter getaway and wants to rank ski resorts by annual snowfall. Can you help him bucket these ski resorts into quartiles?
 
-### Tables  
+### Table  
 * resort_monthly_snowfall(resort_id, resort_name, snow_month, snowfall_inches)
 
 ### Query  
@@ -123,7 +123,7 @@ FROM annual_snowfall;
 ## Day 7 Challenge
 Frosty wants to know how many unique snowflake types were recorded on the December 24th, 2025 storm. Can you help him?
 
-### Tables  
+### Table  
 * snowfall_log(flake_id, flake_type, fall_time)
 
 ### Query  
@@ -156,7 +156,7 @@ FROM storage_lights;
 ```
 
 ## Day 9 Challenge
-The elves are testing new tinsel–light combinations to find the next big holiday trend. Write a query to generate every possible pairing of tinsel colors and light colors, include in your output a column that combines the two values separated with a dash ("-").
+The elves are testing new tinsel–light combinations to find the next big holiday trend. Write a query to generate every possible pairing of tinsel colors and light colors, including in your output a column that combines the two values separated with a dash ("-").
 
 ### Tables  
 * tinsel_colors(tinsel_id, color_name)
@@ -173,9 +173,9 @@ CROSS JOIN light_colors l;
 ```
 
 ## Day 10 Challenge
-In the holiday cookie factory, workers are measuring how efficient each oven is. Can you find the average baking time per oven rounded to one decimal place?
+In the holiday cookie factory, workers are measuring how efficient each oven is. Can you find the average baking time per oven, rounded to one decimal place?
 
-### Tables  
+### Table  
 * cookie_batches(batch_id, oven_id, baking_time_minutes)
 
 ### Query  
@@ -188,9 +188,9 @@ GROUP BY oven_id;
 ```
 
 ## Day 11 Challenge
-At the winter market, Cindy Lou is browsing the clothing inventory and wants to find all items with "sweater" in their name. But the challenge is that the color and item columns have inconsistent capitalization. Can you write a query to return only the sweater names and their cleaned-up colors.
+At the winter market, Cindy Lou is browsing the clothing inventory and wants to find all items with "sweater" in their name. But the challenge is that the color and item columns have inconsistent capitalization. Can you write a query to return only the sweater names and their cleaned-up colors?
 
-### Tables  
+### Table  
 * winter_clothing(item_id, item_name, color)
 
 ### Query  
@@ -208,7 +208,7 @@ WHERE LOWER(item_name) LIKE '%sweater%';
 ## Day 12 Challenge
 The North Pole Network wants to see who's the most active in the holiday chat each day. Write a query to count how many messages each user sent, then find the most active user(s) each day. If multiple users tie for first place, return all of them.
 
-### Tables  
+### Table  
 * npn_users(user_id, user_name)
 * npn_messages(message_id, sender_id, sent_at)
 
@@ -246,7 +246,7 @@ ORDER BY message_date, total_messages DESC;
 ## Day 13 Challenge
 Santa's audit team is reviewing this year's behavior scores to find the extremes — write a query to return the lowest and highest scores recorded on the Naughty or Nice list.
 
-### Tables  
+### Table  
 * behavior_scores(record_id, child_name, behavior_score)
 
 ### Query  
@@ -261,7 +261,7 @@ FROM behavior_scores;
 ## Day 14 Challenge
 The Productivity Club is tracking members' challenge start dates and wants to calculate each member's focus_end_date, exactly 14 days after their start date. Can you write a query to return the existing table with the focus_end_date column?
 
-### Tables  
+### Table  
 * focus_challenges(member_id, member_name, start_date)
 
 ### Query  
@@ -276,7 +276,7 @@ FROM focus_challenges;
 ## Day 15 Challenge
 The Grinch is tracking his daily mischief scores to see how his behavior changes over time. Can you find how many points his score increased or decreased each day compared to the previous day?
 
-### Tables  
+### Table  
 * grinch_mischief_log(log_date, mischief_score)
 
 ### Query  
@@ -289,10 +289,10 @@ FROM grinch_mischief_log;
 ```
 
 
-## Day 15 Challenge
+## Day 16 Challenge
 It's a snow day, and Buddy is deciding which tasks he can do from under a blanket. Can you find all tasks that are either marked as 'Work From Home' or 'Low Priority' so he can stay cozy and productive?
 
-### Tables  
+### Table  
 * daily_tasks(task_id, task_name, task_type, priority)
 
 ### Query  
@@ -306,4 +306,19 @@ WHERE task_type = 'Work From Home'
   OR priority = 'Low';
 ```
 
+## Day 17 Challenge
+During a quiet evening of reflection, Cindy Lou wants to categorize her tasks based on how peaceful they are. Can you write a query that adds a new column classifying each task as 'Calm' if its noise_level is below 50, and 'Chaotic' otherwise?
 
+### Table  
+* evening_tasks(task_id, task_name, noise_level)
+
+### Query  
+```sql
+SELECT 
+  task_name,
+  CASE 
+    WHEN noise_level < 50 THEN 'Calm'
+    ELSE 'Chaotic'
+  END task_classification
+FROM evening_tasks;
+```
