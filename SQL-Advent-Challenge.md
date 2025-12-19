@@ -359,3 +359,18 @@ JOIN daily_quiz_scores d2
   ON d2.subject = l.subject
   AND d2.quiz_date = l.max_date;
 ```
+
+## Day 19 Challenge
+Clara is reviewing holiday orders to uncover hidden patterns — can you return the total amount of wrapping paper used for orders that were both gift-wrapped and successfully delivered?
+
+### Table  
+* holiday_orders(order_id, customer_name, gift_wrap, paper_used_meters, delivery_status, order_date)
+
+### Query  
+```sql
+SELECT 
+  SUM(paper_used_meters) AS amount_of_wrapping
+FROM holiday_orders
+WHERE gift_wrap = TRUE
+  AND delivery_status = 'Delivered';
+```
