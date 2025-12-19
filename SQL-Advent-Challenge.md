@@ -322,3 +322,40 @@ SELECT
   END task_classification
 FROM evening_tasks;
 ```
+
+## Day 18 Challenge
+Over the 12 days of her data challenge, Data Dawn tracked her daily quiz scores across different subjects. Can you find each subject's first and last recorded score to see how much she improved?
+
+### Table  
+* daily_quiz_scores(subject, quiz_date, score)
+
+### Query  
+```sql
+WITH first_date AS (
+  SELECT 
+    subject,
+    MIN(quiz_date) AS min_date
+  FROM daily_quiz_scores
+GROUP BY subject
+),
+last_date AS (
+  SELECT 
+    subject,
+    MAX(quiz_date) AS max_date
+  FROM daily_quiz_scores
+GROUP BY subject
+)
+SELECT
+  f.subject,
+  d1.score AS score_first,
+  d2.score AS score_last
+FROM first_date f 
+JOIN daily_quiz_scores d1
+  ON d1.subject = f.subject
+  AND d1.quiz_date = f.min_date
+JOIN last_date l 
+  ON l.subject = f.subject
+JOIN daily_quiz_scores d2
+  ON d2.subject = l.subject
+  AND d2.quiz_date = l.max_date;
+```
