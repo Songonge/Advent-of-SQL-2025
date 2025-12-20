@@ -374,3 +374,30 @@ FROM holiday_orders
 WHERE gift_wrap = TRUE
   AND delivery_status = 'Delivered';
 ```
+
+## Day 20 Challenge
+Jack Frost wants to review all the cocoa breaks he actually took — including the cocoa type and the location he drank it in. How would you combine the necessary tables to show each logged break with its matching cocoa details and location?
+
+### Table  
+* cocoa_logs(log_id, break_id, cocoa_id)
+* break_schedule(break_id, location_id)
+* cocoa_types(cocoa_id, cocoa_name)
+* locations(location_id, location_name)
+
+### Query  
+```sql
+SELECT 
+  cl.log_id,
+  cl.break_id,
+  ct.cocoa_id,
+  ct.cocoa_name,
+  l.location_name
+FROM cocoa_types ct 
+JOIN cocoa_logs cl
+  ON ct.cocoa_id = cl.cocoa_id
+JOIN break_schedule bs 
+  ON cl.break_id = bs.break_id
+JOIN locations l 
+  ON bs.location_id = l.location_id;
+```
+
