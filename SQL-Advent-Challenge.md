@@ -378,7 +378,7 @@ WHERE gift_wrap = TRUE
 ## Day 20 Challenge
 Jack Frost wants to review all the cocoa breaks he actually took — including the cocoa type and the location he drank it in. How would you combine the necessary tables to show each logged break with its matching cocoa details and location?
 
-### Table  
+### Tables  
 * cocoa_logs(log_id, break_id, cocoa_id)
 * break_schedule(break_id, location_id)
 * cocoa_types(cocoa_id, cocoa_name)
@@ -399,5 +399,20 @@ JOIN break_schedule bs
   ON cl.break_id = bs.break_id
 JOIN locations l 
   ON bs.location_id = l.location_id;
+```
+
+## Day 21 Challenge
+The Snow Queen hosts nightly fireside chats and records how many stories she tells each evening. Can you calculate the running total of stories she has shared over time, in the order they were told?
+
+### Table  
+* story_log(log_date, stories_shared)
+
+### Query  
+```sql
+SELECT 
+  SUM(stories_shared) OVER (
+    ORDER BY log_date
+  ) AS running_total_stories
+FROM story_log;
 ```
 
