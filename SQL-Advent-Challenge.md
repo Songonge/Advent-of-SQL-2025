@@ -416,3 +416,21 @@ SELECT
 FROM story_log;
 ```
 
+## Day 22 Challenge
+The penguins are signing up for a community sleigh ride, but the organizers need a list of everyone who did NOT choose the "Evening Ride." How would you return all penguins whose selected time is not the evening slot?
+
+### Table  
+* sleigh_ride_signups(signup_id, penguin_name, ride_time)
+
+### Query  
+```sql
+SELECT 
+  signup_id,
+  penguin_name,
+  ride_time
+FROM sleigh_ride_signups
+WHERE ride_time <> 'Evening';
+```
+
+
+
