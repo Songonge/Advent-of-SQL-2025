@@ -432,5 +432,19 @@ FROM sleigh_ride_signups
 WHERE ride_time <> 'Evening';
 ```
 
+## Day 23 Challenge
+The Gingerbread House Competition wants to feature the builders who used at least 4 distinct candy types in their designs. How would you identify these builders?
 
+### Table  
+* gingerbread_designs(builder_id, builder_name, candy_type)
+
+### Query  
+```sql
+SELECT 
+  builder_name,
+  COUNT(DISTINCT candy_type) AS candy_type_count
+FROM gingerbread_designs
+GROUP BY builder_name
+HAVING COUNT(DISTINCT candy_type) >= 4;
+```
 
