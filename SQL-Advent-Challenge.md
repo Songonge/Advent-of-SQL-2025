@@ -448,3 +448,26 @@ GROUP BY builder_name
 HAVING COUNT(DISTINCT candy_type) >= 4;
 ```
 
+## Day 24 Challenge
+As the New Year begins, the goals tracker team wants to understand how user types differ. How many completed goals does the average user have in each user_type?
+
+### Table  
+* user_goals(user_id, user_type, goal_id, goal_status)
+
+### Query  
+```sql
+WITH user_completed_goals AS (
+  SELECT 
+    user_id,
+    user_type,
+    COUNT(*) AS goals_completed
+  FROM user_goals
+  WHERE goal_status = 'Completed'
+  GROUP BY user_id, user_type
+)
+SELECT 
+  user_type,
+  ROUND(AVG(goals_completed), 2)
+FROM user_completed_goals
+GROUP BY user_type;
+```
